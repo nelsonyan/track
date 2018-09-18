@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+  <!-- it automatically looks for templates folder under any installed app for base.html -->
+  <!-- as long as the name is unique, just called the name  -->
+  {% block office_block%}
+    {% if report_output %}
+        <title>report</title>
+        <table class = 'table table-striped table-hover' id = 'my_table'>
+          <thead>
+            <tr>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(0)'>ID</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(1)'>Category</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(2)'>Task Name</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(3)'>Dead line</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(4)'>Request by</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(5)'>Date Requested</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(6)'>Assign to</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(7)'>Status</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(8)'>Sku Count</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(9)'>Sell Sheet</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(10)'>POG Render</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(11)'>Arkwork</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(12)'>Mockup</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(13)'>Google</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(14)'>Internal</button></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for EL in report_output %}
+
+              <tr>
+                <td>{{EL.report_key}}</td>
+                <td>{{EL.category}}</td>
+                <td><a href="{% url 'report:track_update' pk=EL.pk %}">{{EL.task_name}}</a></td>
+                <td>{{EL.dead_line}}</td>
+                <td>{{EL.requested_by}}</td>
+                <td>{{EL.date_requested}}</td>
+                <td>{{EL.assigned_to}}</td>
+                <td>{{EL.status}}</td>
+                <td>{{EL.sku_count}}</td>
+                <td>{{EL.sell_sheet}}</td>
+                <td>{{EL.pog_render}}</td>
+                <td>{{EL.artwork_design}}</td>
+                <td>{{EL.mockup}}</td>
+                <td><a href='{{EL.google_url}}'>{{EL.google_url_name}}</a></td>
+                <td><a href="file://{{EL.marklyn_url}}">{{EL.marklyn_url_name}}  </a></td>
+
+              </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+    {% else %}
+      <p class = 'bg-primary'>Track sheet not found</p>
+    {% endif %}
+  {% endblock %}

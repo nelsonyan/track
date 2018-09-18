@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block office_block%}
+  <div class="jumbotron">
+    <h1>Delete Task Name: {{report_delete.task_name}} ?</h1>
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" class = 'btn btn-danger' value="Delete">
+      <a href="{% url 'report:track_update' pk=report_delete.pk%}">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

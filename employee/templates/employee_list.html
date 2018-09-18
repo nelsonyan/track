@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+  <!-- it automatically looks for templates folder under any installed app for base.html -->
+  <!-- as long as the name is unique, just called the name  -->
+  {% block office_block%}
+    {% if employee_list %}
+        <title>Employee List</title>
+        <table class = 'table table-striped table-hover' id = 'my_table'>
+          <thead>
+            <tr>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(0)'>Name</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(1)'>Phone Ex</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(2)'>Email</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(3)'>Department</button></th>
+              <th><button type="button" class = ' btn btn-info' onclick = 'sortTable(4)'>Remote Access</button></th>
+              <th>Cell Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for EL in employee_list %}
+
+              <tr>
+                <td><a href="{% url 'employee:employee_update' pk=EL.id %}">{{EL.first_name}} {{EL.last_name}}</a></td>
+                <td>{{EL.phone_ex}}</td>
+                <td>{{EL.email}}</td>
+                <td>{{EL.department}}</td>
+                <td>{{EL.remote_access}}</td>
+                <td>{{EL.cell}}</td>
+              </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      <!-- </div> -->
+    {% else %}
+      <p class = 'bg-primary'>Employee List not found</p>
+    {% endif %}
+  {% endblock %}

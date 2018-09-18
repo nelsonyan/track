@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+  <!-- it automatically looks for templates folder under any installed app for base.html -->
+  <!-- as long as the name is unique, just called the name  -->
+  {% block office_block%}
+    <h1 class = 'my_header'>
+      {% if not form.instance.pk %}
+        <!-- #to see if the primary key exists-->
+        <title>Create Employee</title>
+        Create New Employee
+      {% else %}
+        <title>Update Employee</title>
+        Update Current Employee
+      {% endif %}
+    </h1> <br>
+    <form enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-6">
+              <table class = 'table table-hover'>
+                {% for my_divider in form %}
+                  {% if forloop.counter <= 6 %}
+                    <tr>
+                      <td>{{ my_divider.label }}</td>
+                      <td>{{ my_divider }}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </table>
+            </div>
+            <div class="col-lg-6">
+              <table class = 'table table-hover'>
+                {% for my_divider in form %}
+                  {% if forloop.counter > 6 %}
+                    <tr>
+                      <td>{{ my_divider.label }}</td>
+                      <td>{{my_divider}}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+          <input type="submit" class = 'btn btn-secondary' value="Submit">
+        </div>
+    </form>
+
+  {% endblock %}

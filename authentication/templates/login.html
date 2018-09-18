@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block office_block %}
+
+<div class="jumbotron">
+  <h1>Please Login</h1>
+  <form action="{% url 'authentication:user_login' %}" method="post">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" placeholder="Enter Username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" placeholder="Enter Pasword">
+    <input type="submit" value="login">
+  </form>
+</div>
+{% endblock %}

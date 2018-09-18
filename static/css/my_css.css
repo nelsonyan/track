@@ -1,0 +1,19 @@
+.my_header {
+  color: black;
+  margin: auto;
+    /* this align the h1 block in middle */
+  width: 100%;
+  text-align: center;
+    /* this align the text inside the blcok */
+}
+/* use class to designate my css to any selector, only h1 tag with my_css_h1 class is affected */
+/* h1, h2, p {} group multiple selector together with same sytle */
+
+
+.bar_on_top {
+  margin-top: 10px;
+}
+
+.body_style {
+  margin: 10px 20px;
+}

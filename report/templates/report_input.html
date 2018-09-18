@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+  {% block office_block%}
+    <title>Request Input</title>
+    <h1 class = 'my_header'>
+      Create New Request
+    </h1> <br>
+    <form enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-6">
+              <table class = 'table table-hover'>
+                {% for my_divider in report_input %}
+                  {% if forloop.counter <= 16 %}
+                    <tr>
+                      <td>{{ my_divider.label }}</td>
+                      <td>{{ my_divider }}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </table>
+            </div>
+            <div class="col-lg-6">
+              <table class = 'table table-hover'>
+                {% for my_divider in report_input %}
+                  {% if forloop.counter > 16 %}
+                    <tr>
+                      <td>{{ my_divider.label }}</td>
+                      <td>{{my_divider}}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+          <input type="submit" class = 'btn btn-secondary' value="Submit">
+          <a href="{% url 'report:track_report'%}"><button type="button" class = 'btn btn-warning'>Cancel</button></a>
+        </div>
+    </form>
+  {% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/my_css.css' %}">
+  </head>
+  <body>
+    <div class = 'body_style'>
+      <nav class="navbar navbar-expand navbar-light sticky-top" style = 'background-color: #7DBAF2;'>
+        <a class="navbar-brand">Marklyn</a>
+        <button type="button" class = 'navbar-toggler' data-toggle = 'collapse' data-target = '#navbarSupportedContent' aria-controls = 'navbarSupportedContent' aria-expanded = 'false'
+        aria-label  = 'Toggle navigation'> <span class = 'navbar-toggler-icon'></span>
+        </button>
+        <div class="collapse navbar-collapse" id = 'navbarSupportedContent'>
+          <ul class = 'navbar-nav mr-auto'>
+            <li class = 'nav-item active'><a class="nav-link" href="{% url 'home:home_page' %}"> <button type="button" class = 'btn btn-secondary'>Home</button><span class = 'sr-only'>(current)</span> </a></li>
+            <li class = 'nav-item active'><a class="nav-link" href="{% url 'admin:index' %}"> <button type="button" class = 'btn btn-secondary'>Admin</button><span class = 'sr-only'>(current)</span> </a></li>
+            <li class = 'nav-item active'><a class="nav-link" href="{% url 'report:track_report' %}"> <button type="button" class = 'btn btn-secondary'>Report</button><span class = 'sr-only'>(current)</span> </a></li>
+            <li class = 'nav-item active'><a class="nav-link" href="{% url 'report:track_input' %}"> <button type="button" class = 'btn btn-secondary'>Enter Request</button><span class = 'sr-only'>(current)</span> </a></li>
+            <li class = 'nav-item active'><a class="nav-link" href="{% url 'report:track_data_export' %}"> <button type="button" class = 'btn btn-secondary'>Export data</button><span class = 'sr-only'>(current)</span> </a></li>
+            <li class = 'nav-item active'><a class="nav-link" href="{% url 'employee:employee_list' %}"> <button type="button" class = 'btn btn-secondary'>Staff</button><span class = 'sr-only'>(current)</span> </a></li>
+            <li class = 'nav-item active'><a class="nav-link" href="{% url 'employee:employee_input' %}"> <button type="button" class = 'btn btn-secondary'>Create Staff</button><span class = 'sr-only'>(current)</span> </a></li>
+
+          </ul>
+        </div>
+
+        <ul class = 'navbar-nav ml-auto'>
+          <form class="form-inline my-2 my-lg-0" >
+            <li><a class="nav-link" href="{% url 'authentication:register' %}"> <button type="button" class = 'btn btn-primary'>Register</button></a></li>
+            {% if user.is_authenticated %}
+              <li> <a class = 'navbar-link' href="{% url 'authentication:user_logout' %}"><button type="button" class = 'btn btn-success'>Logout</button></a></li>
+            {% else %}
+              <li> <a class = 'navbar-link' href="{% url 'authentication:user_login' %}"><button type="button" class = 'btn btn-warning'>Login</button></a></li>
+            {% endif %}
+          </form>
+        </ul>
+      </nav>
+      <div class="bar_on_top">
+        {% block office_block %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <script src = "{% static '/js/sort.js' %}"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+   <script type="text/javascript" src="//cdn.rawgit.com/monim67/django-bootstrap-datepicker-plus/master/bootstrap_datepicker_plus/static/bootstrap_datepicker_plus/js/datepicker-widget.js"></script>
+  </body>
+</html>

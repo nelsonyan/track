@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+  {% block office_block%}
+    <title>Request Detail</title>
+    <h1 class = 'my_header'>
+      Update Current Request
+    </h1> <br>
+    <form enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-6">
+              <table class = 'table table-hover'>
+                {% for my_divider in form %}
+                  {% if forloop.counter <= 16 %}
+                    <tr>
+                      <td>{{ my_divider.label }}</td>
+                      <td>{{ my_divider }}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </table>
+            </div>
+            <div class="col-lg-6">
+              <table class = 'table table-hover'>
+                {% for my_divider in form %}
+                  {% if forloop.counter > 16 %}
+                    <tr>
+                      <td>{{ my_divider.label }}</td>
+                      <td>{{my_divider}}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+          <input type="submit" class = 'btn btn-info' value="Update">
+          <a href="{% url 'report:track_delete' pk=form_delete.pk %}"><button type="button" class = 'btn btn-danger'>Delete</button></a>
+          <a href="{% url 'report:track_report'%}"><button type="button" class = 'btn btn-warning'>Cancel</button></a>
+        </div>
+    </form>
+
+
+
+  {% endblock %}
