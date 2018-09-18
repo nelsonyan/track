@@ -43,13 +43,11 @@ class PublicComment(models.Model):
 
 class TrackHeader(models.Model):
     report_key = models.AutoField(primary_key=True)
-        #show pk in display but not editable
-        # id = models.AutoField(primary_key=True) this is created autoamtically for every model unless specified otherwise
+
     category = models.ForeignKey(Category, on_delete = models.SET_NULL, null = True, blank = True)
     task_name = models.CharField(max_length = 80, blank = True)
     dead_line = models.CharField(null = True, blank = True, max_length = 50)
     requested_by = models.ForeignKey(EmployeeList, on_delete = models.SET_NULL, null = True, blank = True, related_name = 'requested_by')
-        #related_name made doulbe Foreign key possible, why?
     date_requested = models.CharField(null = True, blank = True, max_length = 50)
     assigned_to = models.ForeignKey(EmployeeList, on_delete = models.SET_NULL, null = True, blank = True, related_name = 'assigned_to')
     status = models.ForeignKey(Status, on_delete = models.SET_NULL, null = True, blank = True)
@@ -63,20 +61,12 @@ class TrackHeader(models.Model):
     marklyn_url = models.CharField(max_length = 500, blank = True)
     marklyn_url_name = models.CharField(max_length = 500, blank = True)
     comments = models.TextField(max_length = 5000, blank = True)
-    # YN = (('True', 'Yes'), ('False', 'No'))
-    # test = models.BooleanField(blank = True, choices = YN, default = False)
-    # test2 = models.BooleanField(blank = True, default = True)
 
-    # class Meta:
-        # ordering = ["-report_key"]
-            #this puts the latest highest PK on top of report list. for CBV
-            #this replace 'report_output = TrackHeader.objects.order_by('-report_key')' in view.py if doing CBV
 
     def get_absolute_url(self):
         return reverse('report:track_report')
-            #cannot add kwargs here, or update will not come back to track_report
-            #once update button from report_detial is clicked, it is using this to go back to report.html
+
 
     def __str__(self):
         return str(self.report_key)
-        # string returns proper value
+    
